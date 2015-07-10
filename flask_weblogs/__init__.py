@@ -24,4 +24,4 @@ class WebLogs(object):
             self.init_app(app)
 
     def init_app(self, app):
-        app.register_blueprint(web_logs_blueprint, url_prefix='/web_logs')
+        app.register_blueprint(web_logs_blueprint, url_prefix='/logs')
