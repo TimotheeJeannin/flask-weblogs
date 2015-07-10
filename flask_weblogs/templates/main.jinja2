@@ -3,16 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
 <body>
-{% for log_file_path, log_lines in logs.iteritems() %}
-    <table>
-        {% for log_line in log_lines %}
-            <tr>
-                <td>{{ log_line }}</td>
-            </tr>
-        {% endfor %}
-    </table>
-{% endfor %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            {% for log_file_path, log_lines in logs.iteritems() %}
+                <table class="table table-hover">
+                    <tr>
+                        <th>{{ log_file_path }}</th>
+                    </tr>
+                    {% for log_line in log_lines %}
+                        <tr>
+                            <td>{{ log_line }}</td>
+                        </tr>
+                    {% endfor %}
+                </table>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 </body>
 </html>
