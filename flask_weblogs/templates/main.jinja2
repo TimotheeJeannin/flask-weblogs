@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+{% for log_file_path, log_lines in logs.iteritems() %}
+    <table>
+        {% for log_line in log_lines %}
+            <tr>
+                <td>{{ log_line }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endfor %}
+</body>
+</html>

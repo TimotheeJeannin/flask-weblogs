@@ -24,7 +24,7 @@ WebLogs(app)
 
 @app.route("/")
 def hello():
-    return redirect('weblogs')
+    return redirect('web_logs')
 
 
 if __name__ == "__main__":
