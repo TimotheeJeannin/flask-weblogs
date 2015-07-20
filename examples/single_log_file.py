@@ -1,8 +1,10 @@
 import logging
 from logging.handlers import RotatingFileHandler
+from time import sleep
 
-from flask import Flask, redirect
+from flask import Flask, redirect, Response
 from flask.ext.weblogs import WebLogs
+from gevent.pywsgi import WSGIServer
 
 formatter = logging.Formatter('%(asctime)s | %(levelname)-8s | %(message)s', '%a, %d %b %Y %H:%M:%S')
 
@@ -27,5 +29,17 @@ def hello():
     return redirect('logs')
 
 
+@app.route('/stream')
+def stream():
+    def event_stream():
+        while True:
+            sleep(3)
+            yield 'data: super\n\n'
+
+    return Response(event_stream(), mimetype="text/event-stream")
+
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.debug = True
+    server = WSGIServer(("", 5000), app)
+    server.serve_forever()

@@ -6,6 +6,13 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="application/javascript">
+        var source = new EventSource('/stream');
+        source.onmessage = function (event) {
+            console.log(event);
+            console.log('YEAH');
+        };
+    </script>
 </head>
 <body>
 <div class="container-fluid">
