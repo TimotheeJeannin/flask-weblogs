@@ -15,18 +15,12 @@ class ServerSentEvent(object):
         self.data = data
         self.event = None
         self.id = None
-        self.desc_map = {
-            self.data: "data",
-            self.event: "event",
-            self.id: "id"
-        }
+        self.desc_map = {self.data: "data", self.event: "event", self.id: "id"}
 
     def encode(self):
         if not self.data:
             return ""
-        lines = ["%s: %s" % (v, k)
-                 for k, v in self.desc_map.iteritems() if k]
-
+        lines = ["%s: %s" % (v, k) for k, v in self.desc_map.iteritems() if k]
         return "%s\n\n" % "\n".join(lines)
 
 
@@ -35,7 +29,6 @@ web_logs_blueprint = Blueprint('web_logs', __name__, template_folder=dirname(abs
 
 @web_logs_blueprint.route("/publish")
 def publish():
-    # Dummy data - pick up from request for real data
     def notify():
         msg = str(time.time())
         for sub in subscriptions[:]:
@@ -58,7 +51,7 @@ def subscribe():
                 print 'result ' + result
                 ev = ServerSentEvent(str(result))
                 yield ev.encode()
-        except GeneratorExit:  # Or maybe use flask signals
+        except GeneratorExit:
             print 'generator exit'
             subscriptions.remove(q)
 
