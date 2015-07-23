@@ -29,16 +29,6 @@ def hello():
     return redirect('logs')
 
 
-@app.route('/stream')
-def stream():
-    def event_stream():
-        while True:
-            sleep(3)
-            yield 'data: super\n\n'
-
-    return Response(event_stream(), mimetype="text/event-stream")
-
-
 if __name__ == "__main__":
     app.debug = True
     server = WSGIServer(("", 5000), app)
