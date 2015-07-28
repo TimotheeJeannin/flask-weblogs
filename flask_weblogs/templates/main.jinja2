@@ -9,8 +9,7 @@
     <script type="application/javascript">
         var source = new EventSource('/logs/subscribe');
         source.onmessage = function (event) {
-            console.log(event);
-            console.log('YEAH');
+            $('table').append('<tr><td>' + event.data + '</td></tr>');
         };
     </script>
 </head>
@@ -18,18 +17,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            {% for log_file_path, log_lines in logs.iteritems() %}
-                <table class="table table-hover">
-                    <tr>
-                        <th>{{ log_file_path }}</th>
-                    </tr>
-                    {% for log_line in log_lines %}
-                        <tr>
-                            <td>{{ log_line }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
-            {% endfor %}
+            <table class="table table-hover"></table>
         </div>
     </div>
 </div>

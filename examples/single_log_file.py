@@ -1,8 +1,7 @@
 import logging
 from logging.handlers import RotatingFileHandler
-from time import sleep
 
-from flask import Flask, redirect, Response
+from flask import Flask, redirect
 from flask.ext.weblogs import WebLogs
 from gevent.pywsgi import WSGIServer
 
