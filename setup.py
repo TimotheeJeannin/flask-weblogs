@@ -5,7 +5,14 @@ Flask-WebLogs
 
 Monitor logs from the web.
 """
-from setuptools import setup
+from setuptools import setup, find_packages
+
+
+def get_requirements(suffix=''):
+    with open('requirements%s.txt' % suffix) as f:
+        rv = f.read().splitlines()
+    return rv
+
 
 setup(
     name='Flask-WebLogs',
@@ -13,8 +20,8 @@ setup(
     license='MIT',
     author='Timothée Jeannin',
     author_email='timojeajea@gmail.com',
-    packages=['flask_weblogs'],
-    install_requires=['Flask'],
+    packages=find_packages(),
+    install_requires=get_requirements(),
     classifiers=[
         'Environment :: Web Environment',
         'Intended Audience :: Developers',
