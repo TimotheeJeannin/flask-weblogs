@@ -15,6 +15,7 @@ setup(
     author_email='timojeajea@gmail.com',
     maintainer='Timothée Jeannin',
     maintainer_email='timojeajea@gmail.com',
+    include_package_data=True,
     packages=[
         'flask_weblogs'
     ],
