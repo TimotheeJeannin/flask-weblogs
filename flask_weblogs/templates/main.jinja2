@@ -7,9 +7,35 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     <script type="application/javascript">
+
+        String.prototype.contains = function (it) {
+            return this.indexOf(it) != -1;
+        };
+
+        function getClassForLogLevel(logLine) {
+
+            var lowerLogLine = logLine.toLowerCase();
+
+            if (lowerLogLine.contains('critical')) {
+                return 'danger';
+            }
+            if (lowerLogLine.contains('error')) {
+                return 'danger';
+            }
+            if (lowerLogLine.contains('warning')) {
+                return 'warning';
+            }
+            if (lowerLogLine.contains('debug')) {
+                return 'info';
+            }
+            if (lowerLogLine.contains('notset')) {
+                return 'info';
+            }
+        }
+
         var source = new EventSource('/logs/subscribe');
         source.onmessage = function (event) {
-            $('table').append('<tr><td>' + event.data + '</td></tr>');
+            $('table').append('<tr class="' + getClassForLogLevel(event.data) + '"><td>' + event.data + '</td></tr>');
         };
     </script>
 </head>
@@ -17,6 +43,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
+            <h1>Flask-WebLogs</h1>
             <table class="table table-hover"></table>
         </div>
     </div>

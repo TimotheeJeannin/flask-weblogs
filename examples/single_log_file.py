@@ -1,7 +1,8 @@
 import logging
 from logging.handlers import RotatingFileHandler
 
-from flask import Flask, redirect
+from os.path import dirname, abspath
+from flask import Flask, make_response, request
 from flask.ext.weblogs import WebLogs
 from gevent.pywsgi import WSGIServer
 
@@ -24,8 +25,14 @@ WebLogs(app)
 
 
 @app.route("/")
-def hello():
-    return redirect('logs')
+def index():
+    return make_response(open(dirname(abspath(__file__)) + '/index.html').read())
+
+
+@app.route('/log/<level>', methods=['POST'])
+def log(level):
+    app.logger.log(int(level), request.get_data())
+    return ''
 
 
 if __name__ == "__main__":
